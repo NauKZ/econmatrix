@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Econmatrix — Школа экономики и анализа данных</title>
+    <style>
+        :root {
+            --primary-dark: #122d42;
+            --brand-green: #1f6f5e;
+            --bg-light: #f4f7f6;
+            --text-main: #2b3a42;
+            --white: #ffffff;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--primary-dark);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: var(--brand-green);
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a425e 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--brand-green);
+            color: var(--white);
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.2s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(31, 111, 94, 0.6);
+        }
+        .btn:hover {
+            background-color: #175447;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(25, 90, 75, 0.8);
+        }
+        .about {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--brand-green);
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border-top: 4px solid var(--brand-green);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .courses {
+            background-color: var(--white);
+            padding: 80px 20px;
+        }
+        .courses-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .course-card {
+            display: flex;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-left: 6px solid var(--primary-dark);
+            box-shadow: 0 3px 12px rgba(18, 45, 66, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .course-card:hover {
+            box-shadow: 0 6px 18px rgba(18, 45, 66, 0.2);
+        }
+        .course-info {
+            padding: 40px;
+            flex: 1;
+        }
+        .course-info h3 {
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+        .course-tag {
+            display: inline-block;
+            background-color: rgba(31, 111, 94, 0.1);
+            color: var(--brand-green);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        /* Директор */
+        .director {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+        .director .container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .director-photo {
+            flex-shrink: 0;
+            width: 160px;
+            height: 200px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .director-photo img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .director-info {
+            flex: 1;
+            min-width: 280px;
+            color: var(--text-main);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .director-info ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: #384652;
+            list-style-type: disc;
+        }
+        .contact {
+            max-width: 600px;
+            margin: 80px auto 100px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .contact p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        iframe {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            user-select: none;
+        }
+        footer p {
+            opacity: 0.7;
+        }
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 15px; text-align: center; }
+            .hero h1 { font-size: 2rem; }
+            .course-card { flex-direction: column; }
+            .course-info { padding: 25px; }
+            .director .container { flex-direction: column; text-align: center; }
+            .director-info { min-width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo-area">
+            <img src="C:\Users\user\OneDrive\Рабочий стол\ECON MATRIX LOGO 512х512.png" alt="Econmatrix Logo" class="logo-img" />
+        </div>
+        <nav>
+            <a href="#about">О нас</a>
+            <a href="#courses">Программы</a>
+            <a href="#director">Директор</a>
+            <a href="#apply">Записаться</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-container">
+        <h1>Превратите данные в экономическую стратегию</h1>
+        <p>Обучайтесь у профи рынка и получите навыки анализа данных и эконометрики с практикой на Python, R и Excel. Настройтесь на карьеру будущего уже сегодня!</p>
+        <a href="#apply" class="btn">Записаться на курс</a>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h2 class="section-title">Почему выбирают Econmatrix?</h2>
+    <div class="grid-3">
+        <div class="feature-card">
+            <h3>Глубокое понимание экономики</h3>
+            <p>Превращаем теорию в рабочие инструменты — от экономических моделей до прогностических аналитик для реальных бизнес-задач.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Современные технологии</h3>
+            <p>Обучение работе с Python, R, Excel, SQL и BI-платформами для обработки и визуализации данных на самом высоком уровне.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Поддержка и развитие</h3>
+            <p>Доступ к экспертам с богатым опытом, взаимное обучение и развитие внутри сильного профессионального сообщества.</p>
+        </div>
+    </div>
+</section>
+
+<section class="courses" id="courses">
+    <div class="courses-container">
+        <h2 class="section-title">Наши ключевые программы</h2>
+
+        <div class="course-card">
+            <div class="course-info">
+                <span class="course-tag">Начальный уровень</span>
+                <h3>Онлайн-курсы по анализу данных и применении ИИ в отраслях экономики</h3>
+                <p>Изучите сбор, очистку и визуализацию экономических данных, освоите библиотеки pandas, numpy, создание отчетов и дэшбордов, а также базовые SQL-запросы.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="director" id="director">
+    <h2 class="section-title">Преподователи</h2>
+    <div class="container">
+        <div class="director-photo">
+            <img src="C:\Users\user\OneDrive\Рабочий стол\rus.png" alt="Рустам Бекишев" />
+            <!-- Замените rustam_bekishev_photo.jpg на путь к вашему фото -->
+        </div>
+        <div class="director-info">
+            <p><strong>Рустам Бекишев</strong> — эксперт в области эконометрики, статистики, анализа данных и машинного обучения с более чем 6-летним опытом работы в различных секторах, а также более 5 лет опыта преподавания в вузах. В ходе проектной деятельности реализовал большое количество аналитических проектов с международными организациями, специфика работы покрывала построение прогнозных и аналитических моделей, симуляционных моделей, проведение различных форм статистического тестирования. Его навыки охватывают весь полный цикл работы с данными вплоть до построения моделей.</p>
+            <ul>
+                <li>Участник “Duke Machine Learning Virtual Summer School” (MLvSS) (2018)</li>
+                <li>Выпускник программы по Анализу данных и Машинному обучению международной школы ABLE (2021-2022)</li>
+                <li>Участник программы “DS/ML Methods for Social Network Analysis” от ANR-Lab (2023)</li>
+                <li>Выпускник DS/ML/AI программы от TechOrda (2023)</li>
+                <li>Участник программы “Oxford Machine Learning Summer Program” (OxML) (2023)</li>
+                <li>Участник и призер программы HSE “Econometrics and Data Analysis: Programming in R and Python / R / Excel” (2023)</li>
+                <li>Участник программы SoFiE по Advanced Financial Econometrics (2024)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="director-photo">
+            <img src="C:\Users\user\OneDrive\Рабочий стол\mad.png" alt="Рустам Бекишев" />
+            <!-- Замените rustam_bekishev_photo.jpg на путь к вашему фото -->
+        </div>
+        <div class="director-info">
+            <p><strong>Мадина Маймакова </strong> — эксперт в области экономики и финансового регулирования и финансового моделирования, выпускница Назарбаев Университета и Университетского Колледжа Лондона (UCL) по экономике. Специализируется на разработке политик и стратегий регулирования финансовых институтов с учетом международных стандартов (IOSCO, Basel, IAIS, FSB и FATF), а также на подготовке нормативно-правовых актов в МФЦА. Вела ключевые проекты, как разработка регуляторных актов для стейблкоинов, семейных офисов и казначейских центров.</p>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<section class="contact" id="apply">
+    <h2 class="section-title">Начните обучение сегодня</h2>
+    <p>Заполните форму, чтобы мы могли связаться с вами и подобрать лучший курс.</p>
+
+    <div style="max-width:600px; margin:0 auto;">
+        <!-- Вставьте сюда ссылку на вашу Google форму -->
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf58ZyyRFD6D5VW3xz1PEnlYZ37q1GMYpTo-2XHrwsZJLc9ew/viewform?embedded=true" width="640" height="747" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+		</div>
+</section>
+
+<footer>
+    <p>© 2024 ECON MATRIX — Школа экономики и анализа данных. Все права защищены.</p>
+</footer>
+
+</body>
+</html>
